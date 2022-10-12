@@ -17,8 +17,6 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/secretaria/atletas'])
   }
 
-  turnos(){
-    this.router.navigate(['/secretaria/turnos'])
-  }
+  
 
 }

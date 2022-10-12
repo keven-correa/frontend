@@ -18,6 +18,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {MatListModule} from '@angular/material/list';
     MatDividerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule, 
+    MatStepperModule
 
   ],
   exports:[
@@ -59,7 +61,8 @@ import {MatListModule} from '@angular/material/list';
     MatDividerModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule, 
+    MatStepperModule
 
   ]
 })

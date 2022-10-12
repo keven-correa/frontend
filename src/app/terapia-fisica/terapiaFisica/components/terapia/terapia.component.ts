@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Params, Router, ActivatedRoute } from '@angular/router';
+import { TerapiaFisicaService } from '../../../services/terapia-fisica.service';
 
 @Component({
   selector: 'app-terapia',
@@ -9,21 +10,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./terapia.component.css']
 })
 export class TerapiaComponent implements OnInit {
+formulario!:FormGroup;
 
-  referimientos:any=[
-    {id:1, nombreReferido:'Juan',fecha:'25/2/2022',diagnostico:'Dolor de rodilla',evaluado:'Edgar Arias'},
-    {id:1, nombreReferido:'Juan',fecha:'28/2/2022',diagnostico:'Dolor de Espalda', evaluado:'Luis Reinoso'},
-  ]
+  id:number=1;
+  terapias:any[]=[];
 
-  id:number=1
-
-  constructor(private _router:Router) { }
+  constructor(private _router:Router, private _ruta:ActivatedRoute, private _terapiaFisicaService: TerapiaFisicaService, private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this._ruta.params.subscribe((params:Params)=>{
+      this.id=params['id'];
+      console.log(this.id)
+      this.cargarDatosTerapia(this.id);
+    });
   }
 
-  evaluar(id:number){  
-    this._router.navigate(['/terapia-fisica/terapia-detalle',id ])
+  cargarDatosTerapia(id:number){  
+    this._terapiaFisicaService.ObtenerTerapias().subscribe(resp=>{
+      const a = resp.filter(a=>a.idAtleta==this.id)
+      console.log(resp)
+      this.terapias= a;
+      console.log(a)
+      
+      
+    })
+  }
+
+  evaluar(id:any){  
+    this._router.navigate(['/terapia-fisica/terapia-detalle',this.id ])
 
   }
     

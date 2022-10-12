@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SecretariaService } from '../../services/secretaria.service';
 
 @Component({
   selector: 'app-nuevo-atleta',
@@ -10,10 +12,11 @@ export class NuevoAtletaComponent implements OnInit {
 
   formulario!:FormGroup;
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, private secretariaservice:SecretariaService, private router:Router) { }
 
   ngOnInit(): void {
     this.formulario=this.fb.group({
+      id:[''],
       nombre:['',Validators.required],
       apellido:['',Validators.required],
       edad:['',Validators.required],
@@ -26,8 +29,7 @@ export class NuevoAtletaComponent implements OnInit {
       edadDeportiva:['',Validators.required],
       horasPractica:['',Validators.required],
       diasPractica:['',Validators.required],
-      seguroMedico:['',Validators.required],
-      tipoPaciente:['',Validators.required],
+      seguroMedico:[''],
       escolaridad:['',Validators.required],
       horasEstudio:['',Validators.required],
       diasEstudio:['',Validators.required],
@@ -41,7 +43,7 @@ export class NuevoAtletaComponent implements OnInit {
       FC:['',Validators.required],
       FR:['',Validators.required],
       tempe:['',Validators.required],
-      foto:['',Validators.required]
+      cedula:['']
 
     })
   }
@@ -50,8 +52,9 @@ export class NuevoAtletaComponent implements OnInit {
     this.formulario.controls['foto'].setValue(evento.target.files[0].name)
   }
 
-  guardar(){
-    console.log(this.formulario.value)
+  async guardar(){
+    await this.secretariaservice.AgregarAtletas(this.formulario.value);
+    this.router.navigateByUrl("/secretaria/atletas");
   }
 
 }

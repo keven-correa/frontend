@@ -3,18 +3,15 @@
 
 <mat-grid-list cols="4" rowHeight="4:3">
 
-    <mat-grid-tile *ngFor="let item of referimientos; let i=index" >
+    <mat-grid-tile *ngFor="let item of terapias; let i=index" >
         <mat-card class="example-card">
             <mat-card-title>Atleta</mat-card-title>
             <mat-card-content>
-              <p><strong>Referido por: </strong> {{item.nombreReferido}}</p>
-              <p><strong>Fecha: </strong> {{item.fecha}}</p>
-              <p><strong>Diagnostico: </strong>{{item.diagnostico}}</p>
-              <p><strong>Evaluado por: </strong>{{item.evaluado}}</p>
-              
+              <p><strong>Nombre: </strong> {{item.nombre}}</p>
+              <p><strong>Diagnostico: </strong>{{item.dxMedico}}</p>              
             </mat-card-content>
             <mat-card-actions>
-              <button mat-flat-button color="primary" (click)="evaluar(i+1)" >Atender </button>
+              <button mat-flat-button color="primary" (click)="evaluar(item.idAtleta)" >Atender </button>
               
             </mat-card-actions>
         </mat-card>

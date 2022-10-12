@@ -54,7 +54,7 @@ export class AtletasComponent implements  AfterViewInit,OnInit {
   }
   
   ngOnInit(): void {
-    this._terapiaFisicaService.getAtletas().subscribe(resp=>{
+    this._terapiaFisicaService.ObtenerAtletas().subscribe(resp=>{
       this.ELEMENT_DATA=resp
       this.dataSource.data=this.ELEMENT_DATA
     })

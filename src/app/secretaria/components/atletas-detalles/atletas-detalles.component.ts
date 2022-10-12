@@ -40,15 +40,16 @@ export class AtletasDetallesComponent implements OnInit {
   this.router.navigate(['/secretaria/editar-atleta', this.id])
  }
 
- eliminar(id:number){
-  this.router.navigate(['', this.id])
+ eliminar(id:any){
+  this._secretariaService.eliminarAtleta(id)
+  this.router.navigate(['/secretaria/atletas'])
  }
 
 
  cargarDatos(id:number){
   
   const identificador:number=this.id;
-  this._secretariaService.getAtletas().subscribe(resp=>{
+  this._secretariaService.ObtenerAtletas().subscribe(resp=>{
     for (let i = 0; i < resp.length; i++) {
       const element = resp[i];
       if(resp.find(item=>item.id==identificador)){

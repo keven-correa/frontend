@@ -68,7 +68,7 @@ export class AtletasComponent  implements AfterViewInit {
   }
   
   ngOnInit(): void {
-    this.medicoGeneralService.getAtletas().subscribe(resp=>{
+    this.medicoGeneralService.ObtenerAtletas().subscribe(resp=>{
       this.ELEMENT_DATA=resp
       this.dataSource.data=this.ELEMENT_DATA
     })

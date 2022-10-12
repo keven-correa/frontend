@@ -20,6 +20,9 @@ import { AtletaDetalleComponent } from './medicoGeneral/atleta-detalle/atleta-de
 import { ConsultaAtletaComponent } from './medicoGeneral/consulta-atleta/consulta-atleta.component';
 import { AnaliticaComponent } from './medicoGeneral/analitica/analitica.component';
 import { HttpClientModule } from '@angular/common/http';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -45,7 +48,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     SheredModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
     
   ],
   providers: [],

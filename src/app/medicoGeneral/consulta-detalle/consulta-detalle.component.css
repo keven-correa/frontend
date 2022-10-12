@@ -13,7 +13,7 @@
     
   }
 
-  .example-full-width2 {
+  /* .example-full-width2 {
     width: 100%;
     margin-left: 20%;
     
@@ -32,7 +32,7 @@
     display: block;
     align-items: center;
     
-  }
+  } */
   td {
     padding-right: 8px;
   }
@@ -50,5 +50,17 @@
     
   }
 
-  
-  
+  .mat-stepper-vertical {
+    margin-top: 8px;
+  }
+
+  .espacio{
+    margin-top: 20px;
+  }
+
+
+  button{
+    margin-right: 5px;
+  }
+
+ 

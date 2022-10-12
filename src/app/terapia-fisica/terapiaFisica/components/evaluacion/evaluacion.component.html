@@ -1,12 +1,12 @@
 <app-menu></app-menu>
 
 
-<div class="container">
+<div class="container-fluid">
 
-    <form class="example-form" [formGroup]="formulario" >
+    <form class="example-form" [formGroup]="formulario"  >
     
         <div class="full">
-            <h3>Datos personales</h3>
+            <h3 class="text-white">Datos personales</h3>
         </div>
     
         <table class="example-full-width" cellspacing="3">
@@ -83,7 +83,7 @@
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>DX Terapeutico: </mat-label>
-                        <textarea matInput  rows="5"></textarea>
+                        <textarea matInput class="text-white" formControlName="dxterapeutico"  rows="5"></textarea>
                     </mat-form-field>
                 </td>
     
@@ -100,7 +100,7 @@
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill" >
                         <mat-label>Historia de la enfermedad y tratamiento: </mat-label>
-                        <textarea matInput  rows="10"></textarea >
+                        <textarea matInput class="text-white" formControlName="dxHisEnfermedad" rows="10"></textarea >
                     </mat-form-field>
                 </td>
     
@@ -117,36 +117,36 @@
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>ROM</mat-label>
-                        <input matInput type="number">
+                        <input class="text-white" formControlName="ROM" matInput type="number">
                     </mat-form-field>
                 </td>
     
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Dolor</mat-label>
-                        <input matInput type="number">
+                        <input class="text-white" formControlName="dolor" matInput type="number">
                     </mat-form-field>
                 </td>
 
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill">
                         <mat-label>Cantidad de terapias</mat-label>
-                        <input matInput type="number">
+                        <input class="text-white" formControlName="cantidadTerapia" matInput type="number">
                     </mat-form-field>
                 </td>
     
                 <td>
                     <mat-form-field class="example-full-width" appearance="fill" >
                         <mat-label>Observaciones: </mat-label>
-                        <textarea matInput  rows="1"></textarea >
+                        <textarea matInput class="text-white" formControlName="observaciones" rows="1"></textarea >
                     </mat-form-field>
                 </td>
 
-                <button mat-flat-button color="primary" type="submit" >Guardar </button>
-
-    
+                
+                
             </tr>
         </table>
+        <button mat-flat-button (click)="guardar()" color="primary" type="submit">Guardar </button>
 <!--     
         <div class="full">
             <h3>Trapeuta y fecha del servicio</h3>

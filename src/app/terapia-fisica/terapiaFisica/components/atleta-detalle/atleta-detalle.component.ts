@@ -32,6 +32,7 @@ export class AtletaDetalleComponent implements OnInit {
  ngOnInit(): void {
    this._ruta.params.subscribe((params:Params)=>{
      this.id=params['id'];
+     console.log(this.id)
    });
 
    this.cargarDatos(this.id)
@@ -40,6 +41,14 @@ export class AtletaDetalleComponent implements OnInit {
  datosMedicos(id:number){
   this.router.navigate(['/medico-general/consulta-detalle', this.id])
  }
+
+ referimientos(id:any){
+  this.router.navigate(['terapia-fisica/referimientos',this.id])
+}
+
+terapia(id:any){
+  this.router.navigate(['terapia-fisica/terapia',this.id])
+}
 
  consulta(id:number){
   this.router.navigate(['/medico-general/consulta-atleta', this.id])
@@ -56,7 +65,7 @@ export class AtletaDetalleComponent implements OnInit {
  cargarDatos(id:number){
   
   const identificador:number=this.id;
-  this._terapiaFisicaService.getAtletaDetalle().subscribe(resp=>{
+  this._terapiaFisicaService.ObtenerAtletas().subscribe(resp=>{
     for (let i = 0; i < resp.length; i++) {
       const element = resp[i];
       if(resp.find(item=>item.id==identificador)){
@@ -69,5 +78,6 @@ export class AtletaDetalleComponent implements OnInit {
 
   })
 }
+
 
 }

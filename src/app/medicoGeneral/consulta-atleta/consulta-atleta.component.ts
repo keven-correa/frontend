@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MedicoGeneralService } from '../services/medico-general.service';
+import { collection } from '@firebase/firestore';
+import { Firestore, query, where } from '@angular/fire/firestore';
+import { getLocaleDateFormat } from '@angular/common';
 
 interface Atleta{
   id:number;
@@ -33,10 +36,12 @@ export class ConsultaAtletaComponent implements OnInit {
   id:number=0;
   formulario!:FormGroup;
   atletas:Atleta;
+  fecha: any;
 
   constructor(private _ruta:ActivatedRoute,
               private router:Router,
               private fb:FormBuilder,
+              private firestore:Firestore, 
               private _medicoGeneralService:MedicoGeneralService) {
               this.atletas={ nombre:'',edad:0,disciplina:'',apellido:'',fechaNacimiento:'',sexo:'',id:0,lugarNacimiento:''}
 
@@ -46,10 +51,11 @@ export class ConsultaAtletaComponent implements OnInit {
  ngOnInit(): void {
    this._ruta.params.subscribe((params:Params)=>{
      this.id=params['id'];
+     console.log(this.id)
    })
 
    this.formulario=this.fb.group({
-    idAtleta:['',Validators.required],
+    idAtleta:[this.id],
     nombre:['',Validators.required],
     edad:['',Validators.required],
     apellido:['',Validators.required],
@@ -61,16 +67,17 @@ export class ConsultaAtletaComponent implements OnInit {
     descripcionConsulta:['',Validators.required],
     manejoYTratamientoConsulta:['',Validators.required],
     dxMedico:['',Validators.required],
-    referimientoMedico:['',Validators.required],
+    fecha:[this.fecha= new Date(),Validators.required],
    })
-   this.cargarDatosPersonales(this.id)
+   this.cargarDatosPersonales(this.id);
+  
  }
 
 
  cargarDatosPersonales(id:number){
   
   const identificador:number=this.id;
-  this._medicoGeneralService.getAtletas().subscribe(resp=>{
+  this._medicoGeneralService.ObtenerAtletas().subscribe(resp=>{
     for (let i = 0; i < resp.length; i++) {
       const element = resp[i];
       if(resp.find(item=>item.id==identificador)){
@@ -82,7 +89,7 @@ export class ConsultaAtletaComponent implements OnInit {
           fechaNacimiento:this.atletas.fechaNacimiento,
           lugarNacimiento:this.atletas.lugarNacimiento,
           disciplina:this.atletas.disciplina,
-          sexo:this.atletas.sexo,
+          sexo:this.atletas.sexo
         }) 
       }      
     }
@@ -91,9 +98,8 @@ export class ConsultaAtletaComponent implements OnInit {
 
 enviar(){
   console.log(this.formulario.value)
-  this._medicoGeneralService.addReferimiento(this.formulario.value).subscribe(resp=>{
-    console.log(resp)
-  })
+  this._medicoGeneralService.AgregarConsulta(this.formulario.value)
+  this.router.navigateByUrl("/medico-general/atletas");
 }
 
 }

@@ -17,12 +17,12 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('terapia-fisica/atletas')
   }
 
-  referimientos(){
-    this.router.navigateByUrl('terapia-fisica/referimientos')
-  }
+  // referimientos(){
+  //   this.router.navigateByUrl('terapia-fisica/referimientos')
+  // }
 
-  terapia(){
-    this.router.navigateByUrl('terapia-fisica/terapia')
-  }
+  // terapia(){
+  //   this.router.navigateByUrl('terapia-fisica/terapia')
+  // }
 
 }

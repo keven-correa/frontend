@@ -1,260 +1,203 @@
 <app-menu></app-menu>
 
-<form  class="example-form" [formGroup]="formulario" >
+<form class="example-form" [formGroup]="formulario" (ngSubmit)="guardar()">
 
-    <div class="full">
-        <h3>Datos personales</h3>
+    <div>
+        <h2 class="text-white">Nuevo atleta</h2>
     </div>
 
-    <table class="example-full-width" cellspacing="3">
-        <tr>
+    <div class="row">
+        <div class="col-md-6">
 
-            <td>
+            <div class="form-group">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Nombres</mat-label>
-                    <input formControlName="nombre" matInput type="text">
+                    <input formControlName="nombre" class="text-white" matInput type="text">
                 </mat-form-field>
-            </td>
+            </div>
 
-            <td>
+            <div class="form-group">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Apellidos</mat-label>
-                    <input matInput formControlName="apellido" type="text">
+                    <input matInput class="text-white" formControlName="apellido" type="text">
                 </mat-form-field>
-            </td>
+            </div>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Edad</mat-label>
-                    <input formControlName="edad" matInput type="number">
+                    <input formControlName="edad" class="text-white" matInput type="number">
                 </mat-form-field>
-            </td>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput formControlName="fechaNacimiento" type="date">
+                    <input matInput class="text-white" formControlName="fechaNacimiento" type="date">
                 </mat-form-field>
-            </td>
+            </div>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Lugar de nacimiento</mat-label>
-                    <input matInput formControlName="lugarNacimiento" type="text">
+
+
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
+                    <mat-label>Tipo de sangre</mat-label>
+                    <input matInput class="text-white" formControlName="tipoSangre" type="text">
                 </mat-form-field>
-            </td>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Deporte</mat-label>
-                    <input matInput formControlName="disciplina" type="text">
+                    <input matInput class="text-white" formControlName="disciplina" type="text">
                 </mat-form-field>
-            </td>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Sexo</mat-label>
-                <mat-select formControlName="sexo" disableRipple>
-                    <mat-option value="F">Femenino</mat-option>
-                    <mat-option value="M">Masculino</mat-option>
-                </mat-select>
-            </mat-form-field>
+            </div>
 
 
-        </tr>
-    </table>
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
+                    <mat-label>Cedula</mat-label>
+                    <input matInput class="text-white" formControlName="cedula" type="text">
+                </mat-form-field>
+                <mat-form-field class="example-full-width3" appearance="fill">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select class="text-white" formControlName="sexo" disableRipple>
+                        <mat-option value="Femenino">Femenino</mat-option>
+                        <mat-option value="Masculino">Masculino</mat-option>
+                    </mat-select>
 
-    <table class="example-full-width" cellspacing="3">
-        <tr>
+                </mat-form-field>
+            </div>
 
-            <td>
-                <mat-form-field appearance="fill">
+            <div class="form-group">
+
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Estado civil</mat-label>
-                    <mat-select formControlName="estadoCivil" disableRipple>
-                        <mat-option value="S">Soltero</mat-option>
-                        <mat-option value="C">Casado</mat-option>
-                        <mat-option value="D">Divorciado</mat-option>
-                        <mat-option value="V">Viudo</mat-option>
+                    <mat-select class="text-white" formControlName="estadoCivil" disableRipple>
+                        <mat-option value="Soltero">Soltero</mat-option>
+                        <mat-option value="Casado">Casado</mat-option>
+                        <mat-option value="Divorciado">Divorciado</mat-option>
+                        <mat-option value="Viudo">Viudo</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </td>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Modalidad</mat-label>
-                    <input formControlName="modalidad" matInput type="text">
+                    <input class="text-white" formControlName="modalidad" matInput type="text">
                 </mat-form-field>
-            </td>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+            </div>
+
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Edad deportiva</mat-label>
-                    <input formControlName="edadDeportiva" matInput type="number">
+                    <input class="text-white" formControlName="edadDeportiva" matInput type="number">
                 </mat-form-field>
-            </td>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Horas de practica</mat-label>
-                    <input formControlName="horasPractica" matInput type="number">
+                    <input class="text-white" formControlName="horasPractica" matInput type="number">
                 </mat-form-field>
-            </td>
+            </div>
 
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Dias a la semana</mat-label>
-                    <input matInput formControlName="diasPractica" type="number">
+                    <input class="text-white" matInput formControlName="diasPractica" type="number">
                 </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Seguro medico</mat-label>
-                    <input matInput formControlName="seguroMedico" type="text">
+                    <input class="text-white" matInput formControlName="seguroMedico" type="text">
                 </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>Tipo de paciente</mat-label>
-                    <mat-select formControlName="tipoPaciente" disableRipple>
-                        <mat-option value="A">Atleta</mat-option>
-                        <mat-option value="En">Entrenador</mat-option>
-                        <mat-option value="Em">Empleado</mat-option>
-                        <mat-option value="Ex">Externo</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
+            </div>
 
 
-        </tr>
-    </table>
+        </div>
 
-    <table class="example-full-width" cellspacing="3">
-        <tr>
 
-            <td>
-                <mat-form-field appearance="fill" class="example-full-width ">
-                    <mat-label>Escolaridad</mat-label>
-                    <mat-select formControlName="escolaridad" disableRipple>
-                        <mat-option value="B">Basica</mat-option>
-                        <mat-option value="M">Media</mat-option>
-                        <mat-option value="U">Universitaria</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            <td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Horas de estudio</mat-label>
-                    <input formControlName="horasEstudio" matInput type="number">
-                </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Dias</mat-label>
-                    <input matInput formControlName="diasEstudio" type="text">
-                </mat-form-field>
-            </td>
-
-            <td>
+        <div class="col-md-6">
+            <div class="form-group">
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Direccion actual</mat-label>
-                    <input formControlName="direccion" matInput type="text">
-                </mat-form-field>
-            </td>
-
-            <td>
+                    <input class="text-white" formControlName="direccion" matInput type="text">
+                </mat-form-field>             
+               
+            </div>
+            <div class="form-group">
                 <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Lugar de nacimiento</mat-label>
+                    <input class="text-white" matInput formControlName="lugarNacimiento" type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field appearance="fill" class="example-full-width2">
+                    <mat-label>Escolaridad</mat-label>
+                    <mat-select class="text-white" formControlName="escolaridad" disableRipple>
+                        <mat-option value="Basica">Basica</mat-option>
+                        <mat-option value="Media">Media</mat-option>
+                        <mat-option value="Universitaria">Universitaria</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width3" appearance="fill">
+                    <mat-label>Dias</mat-label>
+                    <input class="text-white" matInput formControlName="diasEstudio" type="text">
+                </mat-form-field>
+                
+            </div>
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
+                    <mat-label>Horas de estudio</mat-label>
+                    <input class="text-white" formControlName="horasEstudio" matInput type="number">
+                </mat-form-field>
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Telefono celular</mat-label>
-                    <input matInput formControlName="telefonoCelular" type="number">
+                    <input class="text-white" matInput formControlName="telefonoCelular" type="number">
                 </mat-form-field>
-            </td>
+               
+            </div>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+            <div class="form-group">
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Telefono de casa</mat-label>
-                    <input matInput formControlName="telefonoCasa" type="number">
-                </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Tipo de sangre</mat-label>
-                    <input matInput formControlName="tipoSangre" type="text">
-                </mat-form-field>
-            </td>
-
-
-        </tr>
-    </table>
-
-    <table class="example-full-width" cellspacing="0">
-        <tr>
-
-            <td class="derecha">
-                <mat-form-field class="example-full-width" appearance="fill">
+                    <input class="text-white" matInput formControlName="telefonoCasa" type="number">
+                </mat-form-field>               
+                <mat-form-field class="example-full-width3" appearance="fill">
                     <mat-label>Peso (KG.)</mat-label>
-                    <input formControlName="peso" matInput type="number">
+                    <input class="text-white" formControlName="peso" matInput type="number">
                 </mat-form-field>
-            </td>
+                
+            </div>
+            <div class="form-group">                
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width2" appearance="fill">
                     <mat-label>Altura (Cm)</mat-label>
-                    <input formControlName="altura" matInput type="number">
+                    <input class="text-white" formControlName="altura" matInput type="number">
                 </mat-form-field>
-            </td>
+                <mat-form-field class="example-full-width3" appearance="fill">
+                    <mat-label>Temperatura promedio</mat-label>
+                    <input class="text-white" formControlName="tempe" matInput type="text">
+                </mat-form-field>
+            </div>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+            <div class="form-group">
+                <mat-form-field class="example-full-width4" appearance="fill">
                     <mat-label>TA</mat-label>
-                    <input formControlName="TA" matInput type="text">
+                    <input class="text-white" formControlName="TA" matInput type="text">
                 </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width4" appearance="fill">
                     <mat-label>FC</mat-label>
-                    <input formControlName="FC" matInput type="text">
+                    <input class="text-white" formControlName="FC" matInput type="text">
                 </mat-form-field>
-            </td>
-
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field class="example-full-width4" appearance="fill">
                     <mat-label>FR</mat-label>
-                    <input formControlName="FR" matInput type="number">
+                    <input class="text-white" formControlName="FR" matInput type="text">
                 </mat-form-field>
-            </td>
+                
+            </div>
 
-            <td>
-                <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>Tempe.</mat-label>
-                    <input formControlName="tempe" matInput type="text">
-                </mat-form-field>
-            </td>
+            <button [disabled]="formulario.invalid" color="primary" type="submit" mat-raised-button class="btn">Guardar</button>
 
-            
-            
-            
-        </tr>
-        
-        <td >
-            <button class="boton-foto" type="button" mat-raised-button (click)="fileInput.click()">
-                <mat-icon>add_a_photo</mat-icon>
-            </button>
-            <input hidden (change)="foto($event)" #fileInput type="file">
+        </div>
+    </div>
 
-            <button [disabled]="formulario.invalid"color="primary" type="submit" mat-raised-button class="btn" (click)="guardar()">Guardar</button>
-        </td>
-   
-
-    </table>
     
 
+
 </form>
-
-
-
-

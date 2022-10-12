@@ -49,14 +49,10 @@ export class AtletaDetalleComponent implements OnInit {
   this.router.navigate(['/medico-general/historial', this.id])
  }
 
- analitica(id:number){
-  this.router.navigate(['/medico-general/analitica', this.id])
- }
-
  cargarDatos(id:number){
   
   const identificador:number=this.id;
-  this.medicoGeneralService.getAtletas().subscribe(resp=>{
+  this.medicoGeneralService.ObtenerAtletas().subscribe(resp=>{
     for (let i = 0; i < resp.length; i++) {
       const element = resp[i];
       if(resp.find(item=>item.id==identificador)){

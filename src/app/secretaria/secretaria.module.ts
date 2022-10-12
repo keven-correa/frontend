@@ -10,6 +10,7 @@ import { NuevoAtletaComponent } from './components/nuevo-atleta/nuevo-atleta.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TurnosComponent } from './components/turnos/turnos.component';
 import { EditarAtletaComponent } from './components/editar-atleta/editar-atleta.component';
+import { CrearTurnoComponent } from './components/crear-turno/crear-turno.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { EditarAtletaComponent } from './components/editar-atleta/editar-atleta.
     AtletasDetallesComponent,
     NuevoAtletaComponent,
     TurnosComponent,
-    EditarAtletaComponent
+    EditarAtletaComponent,
+    CrearTurnoComponent
   ],
   imports: [
     CommonModule,
