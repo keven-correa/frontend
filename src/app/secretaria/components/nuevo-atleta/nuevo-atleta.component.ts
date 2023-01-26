@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SecretariaService } from '../../services/secretaria.service';
 
@@ -12,7 +14,30 @@ export class NuevoAtletaComponent implements OnInit {
 
   formulario!:FormGroup;
 
-  constructor(private fb:FormBuilder, private secretariaservice:SecretariaService, private router:Router) { }
+  public fechaNacimiento!:Date;
+  public edad!:number;
+
+  mobileQuery: MediaQueryList;
+
+  private _mobileQueryListener: () => void;
+
+  constructor(public dialog: MatDialog,
+    private fb:FormBuilder,
+    private router:Router,
+    private secretariaService:SecretariaService,
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher){
+
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+
+}
+
+ngOnDestroy(): void {
+  this.mobileQuery.removeListener(this._mobileQueryListener);
+}
+
+shouldRun = true;
 
   ngOnInit(): void {
     this.formulario=this.fb.group({
@@ -44,17 +69,34 @@ export class NuevoAtletaComponent implements OnInit {
       FR:['',Validators.required],
       tempe:['',Validators.required],
       cedula:['']
-
     })
   }
 
-  foto(evento:any){
-    this.formulario.controls['foto'].setValue(evento.target.files[0].name)
+ 
+
+  // foto(evento:any){
+  //   this.formulario.controls['foto'].setValue(evento.target.files[0].name)
+  // }
+
+//redireccionar el menu
+  atletas(){
+    this.router.navigate(['/secretaria/atletas'])
+  }
+  turnos(){
+    this.router.navigate(['/secretaria/turnos'])
   }
 
   async guardar(){
-    await this.secretariaservice.AgregarAtletas(this.formulario.value);
+    await this.secretariaService.AgregarAtletas(this.formulario.value);
     this.router.navigateByUrl("/secretaria/atletas");
+  }
+
+  fecha(){
+    if (this.fechaNacimiento) {
+      var tiempo=Math.abs(Date.now() - Number(this.fechaNacimiento ));
+      this.edad = Math.floor((tiempo/(1000*3600*24))/365); 
+    }
+    console.log(this.edad);
   }
 
 }

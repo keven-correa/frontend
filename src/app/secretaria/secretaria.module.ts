@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TurnosComponent } from './components/turnos/turnos.component';
 import { EditarAtletaComponent } from './components/editar-atleta/editar-atleta.component';
 import { CrearTurnoComponent } from './components/crear-turno/crear-turno.component';
+import { NuevoTurnoComponent } from './components/nuevo-turno/nuevo-turno.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CrearTurnoComponent } from './components/crear-turno/crear-turno.compon
     NuevoAtletaComponent,
     TurnosComponent,
     EditarAtletaComponent,
-    CrearTurnoComponent
+    CrearTurnoComponent,
+    NuevoTurnoComponent
   ],
   imports: [
     CommonModule,

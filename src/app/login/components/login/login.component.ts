@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
-
+import { LoginI } from '../../../shared/Models/login.interface';
+import { ResponseI } from '../../../shared/Models/response.interface';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario=this.fb.group({
-      usuario:['',[Validators.required]],
-      clave:['',[Validators.required]]
+      email:['',[Validators.required]],
+      password:['',[Validators.required]]
     })
   }
 
@@ -38,53 +39,75 @@ export class LoginComponent implements OnInit {
     //   this.router.navigateByUrl('/terapia-fisica/atletas')
     // }
 
-    this.getUsuarios();
+    // this.getUsuarios();
+    console.log(this.formulario.value)
     
-    
-  }
+    this.loginservice.getUsuarios(this.formulario.value).subscribe(data=>{
+      const respuesta:any =data
+      console.log(respuesta)
 
-  
-  getUsuarios(){
-    this.loginservice.getUsuario().
-    subscribe((resp)=>{
-      let i=0;
-      for (i = 0; i < resp.length; i++) {
-        if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='administrador'){
-          this.router.navigateByUrl('/admin/usuarios')
-          this.mensaje=false
-          return
-        }
-        else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='medicoGeneral'){
-          this.router.navigateByUrl('/medico-general/atletas')
-          this.mensaje=false
+      // if (respuesta.status!= '400') {
+      //   localStorage.setItem('token',respuesta.response.token)
+        
+        if(respuesta.role == "Administrator"){
+        localStorage.setItem('token',respuesta.token)
+        // localStorage.setItem('role',respuesta.role)
 
-          return
-        }
-        else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='terapeutaFisico'){
-          this.router.navigateByUrl('/terapia-fisica/atletas')
-          this.mensaje=false
-
-          return
-        }
-        else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='secretaria'){
           this.router.navigateByUrl('/secretaria/atletas')
-          this.mensaje=false
-
-          return
-        }
-       else{
-        this.mensaje=true
         }
         
-      } 
-      if(this.mensaje==true){
-        this.mensajeError()
-
+      // }
+      else{
+        this.mensajeError();
       }
     })
-
     
   }
+
+
+  
+  // getUsuarios(){
+  //   this.loginservice.getUsuario().
+  //   subscribe((resp)=>{
+  //     let i=0;
+  //     for (i = 0; i < resp.length; i++) {
+  //       if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='administrador'){
+  //         this.router.navigateByUrl('/admin/usuarios')
+  //         this.mensaje=false
+  //         return
+  //       }
+  //       else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='medicoGeneral'){
+  //         this.router.navigateByUrl('/medico-general/atletas')
+  //         this.mensaje=false
+
+  //         return
+  //       }
+  //       else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='terapeutaFisico'){
+  //         this.router.navigateByUrl('/terapia-fisica/atletas')
+  //         this.mensaje=false
+
+  //         return
+  //       }
+  //       else if(this.formulario.value.usuario==resp[i].usuario&&this.formulario.value.clave==resp[i].clave&&resp[i].rol==='secretaria'){
+  //         this.router.navigateByUrl('/secretaria/atletas')
+  //         this.mensaje=false
+
+  //         return
+  //       }
+  //      else{
+  //       this.mensaje=true
+  //       }
+        
+  //     } 
+  //     if(this.mensaje==true){
+  //       this.mensajeError()
+
+  //     }
+  //   })
+
+    
+  // }
+
 
   mensajeError(){
     this.mensaje=true 

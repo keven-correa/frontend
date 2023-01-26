@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SecretariaService } from '../../services/secretaria.service';
 
@@ -16,16 +18,33 @@ interface Atleta{
   styleUrls: ['./atletas-detalles.component.css']
 })
 export class AtletasDetallesComponent implements OnInit {
+  
+    id:number=0;
+    atletas:Atleta;
 
-  id:number=0;
-  atletas:Atleta;
+  mobileQuery: MediaQueryList; 
 
-  constructor(private _ruta:ActivatedRoute,
-              private router:Router,
-              private _secretariaService:SecretariaService) {
-    
-    this.atletas={nombre:'',id:0,apellido:'',disciplina:'',sexo:'',edad:0}   
-  }
+  private _mobileQueryListener: () => void;
+
+  constructor(public dialog: MatDialog,
+    private _ruta:ActivatedRoute,
+    private router:Router,
+    private _secretariaService:SecretariaService,
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher){
+
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+
+      this.atletas={nombre:'',id:0,apellido:'',disciplina:'',sexo:'',edad:0}   
+
+}
+
+ngOnDestroy(): void {
+this.mobileQuery.removeListener(this._mobileQueryListener);
+}
+
+shouldRun = true;
 
  ngOnInit(): void {
    this._ruta.params.subscribe((params:Params)=>{
@@ -45,7 +64,6 @@ export class AtletasDetallesComponent implements OnInit {
   this.router.navigate(['/secretaria/atletas'])
  }
 
-
  cargarDatos(id:number){
   
   const identificador:number=this.id;
@@ -61,6 +79,15 @@ export class AtletasDetallesComponent implements OnInit {
     }
 
   })
+}
+
+ //Navegar en el menu
+ turnos(){
+  this.router.navigate(['/secretaria/turnos'])
+}
+
+atletasR(){
+  this.router.navigate(['/secretaria/atletas'])
 }
 
 }

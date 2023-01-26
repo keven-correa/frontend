@@ -1,54 +1,67 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { SecretariaService } from '../../services/secretaria.service';
 
+interface ATL  {
+  atleta:string,
+  lugar:string
+
+ }
+
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
   styleUrls: ['./turnos.component.css']
 })
+
+
 export class TurnosComponent implements AfterViewInit {
-  ELEMENT_DATA: any[] = [
-    {},
-    // {id: 2, nombre: 'Manuel', apellido: 'Gonzalez' , disciplina: 'Basketball', sexo:'M'},
-    // {id: 3, nombre: 'Juana', apellido: 'Castillo', disciplina: 'Baseball', sexo:'F'},
-    // {id: 4, nombre: 'Saldy', apellido:'Amparo' , disciplina: 'Voleibol', sexo:'F'},
-    // {id: 5, nombre: 'Nicol', apellido: 'Borbon' , disciplina: 'Atletismo', sexo:'F'},
-    // {id: 6, nombre: 'Keven', apellido: 'Correa', disciplina: 'Natacion', sexo:'M'},
-    // {id: 7, nombre: 'Edgar', apellido: 'Mena', disciplina: 'Natacion', sexo:'M'},
-    // {id: 8, nombre: 'Julia', apellido: 'Ruiz', disciplina: 'Boxeo', sexo:'F'},
-    // {id: 9, nombre: 'Joan', apellido:'Sena' , disciplina: 'Judo', sexo:'M'},
-    // {id: 10, nombre: 'Daniel', apellido: 'Perez', disciplina: 'Boxeo', sexo:'M'},
-    // {id: 10, nombre: 'Daniel', apellido: 'Feliz', disciplina: 'Judo', sexo:'M'},
-    
-  ];
+  ELEMENT_DATA: any[] = [];
 
   atletas:any[]=[];
-  atletaDetalle:any[]=[];
+  turnosPendientes:ATL[] =[];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['id', 'LugarVisita', 'NombreAtleta'];
+  displayedColumns: string[] = ['id', 'atleta', 'lugar'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
+  mobileQuery: MediaQueryList;
 
+  private _mobileQueryListener: () => void;
 
   constructor(public dialog: MatDialog,
-              private router:Router,
-              private _secretariaService:SecretariaService){
+    private fb:FormBuilder,
+    private router:Router,
+    private _secretariaService:SecretariaService,
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher){
 
-  }
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+
+}
+
+ngOnDestroy(): void {
+  this.mobileQuery.removeListener(this._mobileQueryListener);
+}
+
+shouldRun = true;
   
   ngOnInit(): void {
-    this._secretariaService.getTurnos().subscribe(resp=>{
+    this._secretariaService.ObtenerTurnos().subscribe(resp=>{
+      this.turnosPendientes=resp
       this.ELEMENT_DATA=resp
       this.dataSource.data=this.ELEMENT_DATA
-    })
-
-  }
+    }) 
+      
+    }
+   
   
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -57,7 +70,7 @@ export class TurnosComponent implements AfterViewInit {
   
 
   crearTurno(){
-    this.router.navigate(['/secretaria/nuevo-turno'])
+    this.router.navigate(['/secretaria/nuevo-turno']);
   }
 
   envio(id:number){
@@ -73,8 +86,19 @@ export class TurnosComponent implements AfterViewInit {
       }
     }
 
+    //redireccionar el menu
+  atletasR(){
+    this.router.navigate(['/secretaria/atletas'])
+  }
+  turnos(){
+    this.router.navigate(['/secretaria/turnos'])
+  }
     
-
+  obtenerTurnos(){
+    this._secretariaService.ObtenerTurnos().subscribe(resp=>{
+      this.atletas=resp
+    })
+  }
 
     
 }

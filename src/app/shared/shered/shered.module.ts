@@ -19,6 +19,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatListModule} from '@angular/material/list';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,11 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCheckboxModule,
     MatDatepickerModule,
     MatListModule, 
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule,
+    MatBottomSheetModule,
+
+    
 
   ],
   exports:[
@@ -62,7 +68,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatCheckboxModule,
     MatDatepickerModule,
     MatListModule, 
-    MatStepperModule
+    MatStepperModule,
+    MatSidenavModule,
+    MatBottomSheetModule,
 
   ]
 })

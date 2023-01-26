@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { AutenticacionGuard } from './shared/guard/autenticacion.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +17,10 @@ const routes: Routes = [
   },
   {
     path:'secretaria',
-    loadChildren:()=>import('./secretaria/secretaria.module').then(m=>m.SecretariaModule)
+    loadChildren:()=>import('./secretaria/secretaria.module').then(m=>m.SecretariaModule),
+    // canLoad:[AutenticacionGuard],
+    // canActivate:{AutenticacionGuard}
+
   },
   {
     path:'**',

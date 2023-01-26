@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SecretariaService } from '../../services/secretaria.service';
 
@@ -43,7 +45,24 @@ export class EditarAtletaComponent implements OnInit {
   atleta:atleta;
 
   formulario!:FormGroup;
-  constructor( private _ruta:ActivatedRoute,private fb:FormBuilder, private _secretariaservice:SecretariaService, private router:Router) {
+
+  mobileQuery: MediaQueryList; 
+
+  private _mobileQueryListener: () => void;
+
+ngOnDestroy(): void {
+this.mobileQuery.removeListener(this._mobileQueryListener);
+}
+shouldRun = true;
+
+  constructor(public dialog: MatDialog, private _ruta:ActivatedRoute,private fb:FormBuilder,
+     private _secretariaservice:SecretariaService, private router:Router,
+     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+
     this.atleta={ nombre: '',
       apellido:'',
       edad:'',
@@ -159,6 +178,15 @@ Actualizar(){
   this.router.navigate(['/secretaria/atletas'])
 
 
+}
+
+ //Navegar en el menu
+ turnos(){
+  this.router.navigate(['/secretaria/turnos'])
+}
+
+atletasR(){
+  this.router.navigate(['/secretaria/atletas'])
 }
 
 

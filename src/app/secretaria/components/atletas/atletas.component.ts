@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SecretariaService } from '../../services/secretaria.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 
 export interface Atleta {
@@ -20,7 +21,7 @@ export interface Atleta {
 })
 export class AtletasComponent   implements AfterViewInit {
   ELEMENT_DATA: Atleta[] = [
-    {id: 1, nombre: 'Antonio', apellido:'Guzman' , disciplina: 'Boxeo', sexo:'M'},
+    // {id: 1, nombre: 'Antonio', apellido:'Guzman' , disciplina: 'Boxeo', sexo:'M'},
     // {id: 2, nombre: 'Manuel', apellido: 'Gonzalez' , disciplina: 'Basketball', sexo:'M'},
     // {id: 3, nombre: 'Juana', apellido: 'Castillo', disciplina: 'Baseball', sexo:'F'},
     // {id: 4, nombre: 'Saldy', apellido:'Amparo' , disciplina: 'Voleibol', sexo:'F'},
@@ -34,6 +35,10 @@ export class AtletasComponent   implements AfterViewInit {
     
   ];
 
+  mobileQuery: MediaQueryList; 
+
+  private _mobileQueryListener: () => void;
+
   atletas:any[]=[];
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -45,9 +50,22 @@ export class AtletasComponent   implements AfterViewInit {
 
   constructor(public dialog: MatDialog,
               private router:Router,
-              private _secretariaService:SecretariaService){
+              private _secretariaService:SecretariaService,
+              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher){
+
+                this.mobileQuery = media.matchMedia('(max-width: 600px)');
+                this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+                this.mobileQuery.addListener(this._mobileQueryListener);
 
   }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  shouldRun = true;
+
+  
   
   ngOnInit(): void {
 
@@ -78,7 +96,14 @@ export class AtletasComponent   implements AfterViewInit {
         this.dataSource.paginator.firstPage();
       }
     }
+    //Navegar en el menu
+    turnos(){
+      this.router.navigate(['/secretaria/turnos'])
+    }
 
+    atletasR(){
+      this.router.navigate(['/secretaria/atletas'])
+    }
     
 
 

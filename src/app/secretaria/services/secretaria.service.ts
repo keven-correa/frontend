@@ -20,9 +20,7 @@ export class SecretariaService {
     const ref= collection(this.firestore,'Atletas');
      return collectionData(ref,{idField:"id"}) as Observable<any[]>;
     
-  }
-  
-  
+  }  
 
   eliminarAtleta(id:any){
     const ref= doc(this.firestore,`Atletas/${id}`);
@@ -41,4 +39,15 @@ export class SecretariaService {
   getTurnos():Observable<any[]>{
     return this.http.get<any[]>('../../assets/data/turnos.json')
   }
+
+  AgregarTurno(turno:any){
+    const ref= collection(this.firestore,'Turnos');
+    return addDoc(ref,turno);
+  }
+
+  ObtenerTurnos():Observable<any[]>{
+    const ref= collection(this.firestore,'Turnos');
+     return collectionData(ref,{idField:"id"}) as Observable<any[]>;
+    
+  } 
 }

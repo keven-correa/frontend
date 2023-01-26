@@ -6,6 +6,8 @@ import { EditarAtletaComponent } from './components/editar-atleta/editar-atleta.
 import { NuevoAtletaComponent } from './components/nuevo-atleta/nuevo-atleta.component';
 import { TurnosComponent } from './components/turnos/turnos.component';
 import { CrearTurnoComponent } from './components/crear-turno/crear-turno.component';
+import { NuevoTurnoComponent } from './components/nuevo-turno/nuevo-turno.component';
+import { AutenticacionGuard } from '../shared/guard/autenticacion.guard';
 
 const routes: Routes = [
   {
@@ -16,8 +18,10 @@ const routes: Routes = [
       {path:'nuevo-atleta', component:NuevoAtletaComponent},
       {path:'turnos',component:TurnosComponent},
       {path:'editar-atleta/:id',component:EditarAtletaComponent},
-      {path:'nuevo-turno',component:CrearTurnoComponent}
-    ],
+      {path:'nuevo-turno',component:CrearTurnoComponent},
+      {path:'crear-turno/id',component:NuevoTurnoComponent},
+    ] 
+
     
   },
   {
