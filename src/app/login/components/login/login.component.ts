@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         
         if(respuesta.role == "Administrator"){
         localStorage.setItem('token',respuesta.token)
-        // localStorage.setItem('role',respuesta.role)
+        localStorage.setItem('role',respuesta.role)
 
           this.router.navigateByUrl('/secretaria/atletas')
         }
